@@ -7,6 +7,7 @@ import EditableTable from "./components/EditableTable";
 import { generatePdfBlob } from "./utils/pdfGenerator";
 
 import Layout from "./components/Layout"; // <-- Nytt: Layout importeras här
+import ImportGogleSheet from "./components/ImportGoogleSheet";
 
 function App() {
   // State för att spara den fil användaren väljer
@@ -50,6 +51,7 @@ function App() {
       {" "}
       {/* <-- Allt innehåll omsluts av Layout så header/footer syns */}
       {progress === "start" && (
+        <div className="flex flex-col items-center gap-6">
         <UploadFile
           file={file}
           setFile={setFile}
@@ -58,23 +60,28 @@ function App() {
           setProgress={setProgress}
           setRowData={setRowData}
         />
+
+        <p className="text-gray-500 font-medium">Or</p>
+
+        <ImportGogleSheet setProgress={setProgress} setRowData={setRowData} />
+        </div>
       )}
       {progress === "editTable" && (
-          <EditableTable
-            data={rowData}
-            onDataChange={handleDataChange}
-            onExport={handleExportToPdf}
-            onReset={() => {
-              // 🔸 NEW
-              setFile(null); // nollställ fil
-              setWorkbook(null); // nollställ workbook
-              setRowData([]); // töm tabell-data
-              setEditedData([]); // töm redigerad data
-              setPdfUrl(null); // nollställ pdf-url
-              setExportStatus(null); // nollställ exportstatus
-              setProgress("start"); // tillbaka till start
-            }}
-          />
+        <EditableTable
+          data={rowData}
+          onDataChange={handleDataChange}
+          onExport={handleExportToPdf}
+          onReset={() => {
+            // 🔸 NEW
+            setFile(null); // nollställ fil
+            setWorkbook(null); // nollställ workbook
+            setRowData([]); // töm tabell-data
+            setEditedData([]); // töm redigerad data
+            setPdfUrl(null); // nollställ pdf-url
+            setExportStatus(null); // nollställ exportstatus
+            setProgress("start"); // tillbaka till start
+          }}
+        />
       )}
       {progress === "export" && (
         <ExportDialogue

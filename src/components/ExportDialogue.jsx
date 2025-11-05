@@ -15,8 +15,8 @@ export default function ExportDialogue({
   onCancel,
   onGoHome,
 }) {
-  /* Behöver vi den här längre? */
- // 🔸 NEW helt borttaget – vi behåller bara de riktiga exportStatus: "success" | "error"
+
+  // 🔸 NEW helt borttaget – vi behåller bara de riktiga exportStatus: "success" | "error"
 
   return (
     <div className="bg-opacity-50 fixed inset-0 z-50 flex items-center justify-center bg-gray-100 p-4 backdrop-blur-sm sm:p-6">
